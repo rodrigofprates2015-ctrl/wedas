@@ -1,22 +1,37 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Wédas - Corporate Recognition Platform API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: auth
+    description: Authentication
+  - name: users
+    description: User management
+  - name: categories
+    description: Recognition categories
+  - name: recognitions
+    description: Wédas recognitions
+  - name: rankings
+    description: Rankings
+  - name: dashboard
+    description: Dashboard stats
+  - name: settings
+    description: Platform settings
+  - name: reports
+    description: Reports
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +39,442 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      summary: Login with email and password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "401":
+          description: Invalid credentials
+
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [auth]
+      summary: Logout
+      responses:
+        "200":
+          description: Logged out
+
+  /auth/me:
+    get:
+      operationId: getMe
+      tags: [auth]
+      summary: Get current user
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: Unauthorized
+
+  /users:
+    get:
+      operationId: listUsers
+      tags: [users]
+      summary: List all active users
+      parameters:
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: department
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+    post:
+      operationId: createUser
+      tags: [users]
+      summary: Create a new user (HR only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserInput"
+      responses:
+        "201":
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+  /users/{id}:
+    get:
+      operationId: getUser
+      tags: [users]
+      summary: Get user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: User found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: User not found
+    patch:
+      operationId: updateUser
+      tags: [users]
+      summary: Update user (HR only)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserUpdate"
+      responses:
+        "200":
+          description: User updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+  /categories:
+    get:
+      operationId: listCategories
+      tags: [categories]
+      summary: List all categories
+      responses:
+        "200":
+          description: List of categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
+    post:
+      operationId: createCategory
+      tags: [categories]
+      summary: Create a new category (HR only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CategoryInput"
+      responses:
+        "201":
+          description: Category created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+
+  /categories/{id}:
+    patch:
+      operationId: updateCategory
+      tags: [categories]
+      summary: Update category (HR only)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CategoryUpdate"
+      responses:
+        "200":
+          description: Category updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+
+  /recognitions:
+    get:
+      operationId: listRecognitions
+      tags: [recognitions]
+      summary: List recognitions (sent and received)
+      parameters:
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [sent, received, all]
+        - name: userId
+          in: query
+          schema:
+            type: integer
+        - name: categoryId
+          in: query
+          schema:
+            type: integer
+        - name: startDate
+          in: query
+          schema:
+            type: string
+        - name: endDate
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of recognitions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Recognition"
+    post:
+      operationId: sendRecognition
+      tags: [recognitions]
+      summary: Send a Wéda recognition
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecognitionInput"
+      responses:
+        "201":
+          description: Recognition sent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Recognition"
+        "400":
+          description: Validation error (insufficient balance, self-recognition, etc.)
+
+  /recognitions/{id}/cancel:
+    patch:
+      operationId: cancelRecognition
+      tags: [recognitions]
+      summary: Cancel a recognition (HR only, soft delete)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Recognition cancelled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Recognition"
+
+  /rankings/received:
+    get:
+      operationId: getRankingByReceived
+      tags: [rankings]
+      summary: Ranking by most Wédas received
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Ranking by received
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RankingEntry"
+
+  /rankings/sent:
+    get:
+      operationId: getRankingBySent
+      tags: [rankings]
+      summary: Ranking by most Wédas sent (most engaged)
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Ranking by sent
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RankingEntry"
+
+  /rankings/by-category:
+    get:
+      operationId: getRankingByCategory
+      tags: [rankings]
+      summary: Ranking breakdown by category
+      responses:
+        "200":
+          description: Category ranking
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CategoryRankingEntry"
+
+  /dashboard/me:
+    get:
+      operationId: getMyDashboard
+      tags: [dashboard]
+      summary: Get personal dashboard stats
+      responses:
+        "200":
+          description: Personal dashboard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalDashboard"
+
+  /dashboard/hr:
+    get:
+      operationId: getHrDashboard
+      tags: [dashboard]
+      summary: Get HR dashboard stats (HR/Manager only)
+      responses:
+        "200":
+          description: HR dashboard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HrDashboard"
+
+  /settings:
+    get:
+      operationId: getSettings
+      tags: [settings]
+      summary: Get platform settings
+      responses:
+        "200":
+          description: Settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Settings"
+    patch:
+      operationId: updateSettings
+      tags: [settings]
+      summary: Update platform settings (HR only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SettingsUpdate"
+      responses:
+        "200":
+          description: Settings updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Settings"
+
+  /reports/users:
+    get:
+      operationId: getUsersReport
+      tags: [reports]
+      summary: Users report with totals
+      responses:
+        "200":
+          description: Users report
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserReportEntry"
+
+  /reports/financial:
+    get:
+      operationId: getFinancialReport
+      tags: [reports]
+      summary: Financial report with coin conversions
+      responses:
+        "200":
+          description: Financial report
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FinancialReportEntry"
+
+  /reports/categories:
+    get:
+      operationId: getCategoriesReport
+      tags: [reports]
+      summary: Categories usage report
+      responses:
+        "200":
+          description: Categories report
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CategoryReportEntry"
+
+  /monthly-balance:
+    get:
+      operationId: getMyBalance
+      tags: [recognitions]
+      summary: Get my current monthly balance
+      responses:
+        "200":
+          description: Monthly balance
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MonthlyBalance"
+
 components:
   schemas:
     HealthStatus:
@@ -31,6 +482,322 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
+    LoginInput:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+
+    AuthResponse:
+      type: object
+      required: [user, token]
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        token:
+          type: string
+
+    User:
+      type: object
+      required: [id, name, email, department, position, role, active, createdAt]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        department:
+          type: string
+        position:
+          type: string
+        role:
+          type: string
+          enum: [employee, manager, hr]
+        active:
+          type: boolean
+        createdAt:
+          type: string
+
+    UserInput:
+      type: object
+      required: [name, email, password, department, position, role]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        department:
+          type: string
+        position:
+          type: string
+        role:
+          type: string
+          enum: [employee, manager, hr]
+
+    UserUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        department:
+          type: string
+        position:
+          type: string
+        role:
+          type: string
+          enum: [employee, manager, hr]
+        active:
+          type: boolean
+
+    Category:
+      type: object
+      required: [id, name, icon, active]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        icon:
+          type: string
+        active:
+          type: boolean
+
+    CategoryInput:
+      type: object
+      required: [name, icon]
+      properties:
+        name:
+          type: string
+        icon:
+          type: string
+
+    CategoryUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        icon:
+          type: string
+        active:
+          type: boolean
+
+    Recognition:
+      type: object
+      required: [id, senderId, receiverId, categoryId, coins, message, status, createdAt, sender, receiver, category]
+      properties:
+        id:
+          type: integer
+        senderId:
+          type: integer
+        receiverId:
+          type: integer
+        categoryId:
+          type: integer
+        coins:
+          type: integer
+        message:
+          type: string
+        status:
+          type: string
+          enum: [active, cancelled]
+        createdAt:
+          type: string
+        cancelledAt:
+          type: ["string", "null"]
+        cancelledBy:
+          type: ["integer", "null"]
+        sender:
+          $ref: "#/components/schemas/UserSummary"
+        receiver:
+          $ref: "#/components/schemas/UserSummary"
+        category:
+          $ref: "#/components/schemas/Category"
+
+    UserSummary:
+      type: object
+      required: [id, name, department, position]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        department:
+          type: string
+        position:
+          type: string
+
+    RecognitionInput:
+      type: object
+      required: [receiverId, categoryId, coins, message]
+      properties:
+        receiverId:
+          type: integer
+        categoryId:
+          type: integer
+        coins:
+          type: integer
+        message:
+          type: string
+          maxLength: 300
+
+    RankingEntry:
+      type: object
+      required: [rank, user, totalCoins, totalRecognitions]
+      properties:
+        rank:
+          type: integer
+        user:
+          $ref: "#/components/schemas/UserSummary"
+        totalCoins:
+          type: integer
+        totalRecognitions:
+          type: integer
+
+    CategoryRankingEntry:
+      type: object
+      required: [category, totalCoins, totalRecognitions]
+      properties:
+        category:
+          $ref: "#/components/schemas/Category"
+        totalCoins:
+          type: integer
+        totalRecognitions:
+          type: integer
+
+    PersonalDashboard:
+      type: object
+      required: [availableBalance, allocatedThisMonth, receivedThisMonth, accumulatedValue, rankingPosition, recentRecognitions]
+      properties:
+        availableBalance:
+          type: integer
+        allocatedThisMonth:
+          type: integer
+        receivedThisMonth:
+          type: integer
+        sentThisMonth:
+          type: integer
+        accumulatedValue:
+          type: number
+        rankingPosition:
+          type: ["integer", "null"]
+        recentRecognitions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Recognition"
+
+    HrDashboard:
+      type: object
+      required: [totalDistributed, totalRecognitions, avgPerUser, topCategory, topDepartment, monthlyEvolution]
+      properties:
+        totalDistributed:
+          type: integer
+        totalRecognitions:
+          type: integer
+        avgPerUser:
+          type: number
+        topCategory:
+          $ref: "#/components/schemas/Category"
+        topDepartment:
+          type: string
+        monthlyEvolution:
+          type: array
+          items:
+            $ref: "#/components/schemas/MonthlyEvolutionEntry"
+        activeUsers:
+          type: integer
+        engagementRate:
+          type: number
+
+    MonthlyEvolutionEntry:
+      type: object
+      required: [month, year, totalCoins, totalRecognitions]
+      properties:
+        month:
+          type: integer
+        year:
+          type: integer
+        totalCoins:
+          type: integer
+        totalRecognitions:
+          type: integer
+
+    Settings:
+      type: object
+      required: [id, coinConversionRate, monthlyCoinLimit]
+      properties:
+        id:
+          type: integer
+        coinConversionRate:
+          type: number
+        monthlyCoinLimit:
+          type: integer
+
+    SettingsUpdate:
+      type: object
+      properties:
+        coinConversionRate:
+          type: number
+        monthlyCoinLimit:
+          type: integer
+
+    UserReportEntry:
+      type: object
+      required: [user, coinsReceived, coinsSent, recognitionsReceived, recognitionsSent]
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        coinsReceived:
+          type: integer
+        coinsSent:
+          type: integer
+        recognitionsReceived:
+          type: integer
+        recognitionsSent:
+          type: integer
+
+    FinancialReportEntry:
+      type: object
+      required: [user, totalCoins, monetaryValue]
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        totalCoins:
+          type: integer
+        monetaryValue:
+          type: number
+
+    CategoryReportEntry:
+      type: object
+      required: [category, totalCoins, totalRecognitions, percentage]
+      properties:
+        category:
+          $ref: "#/components/schemas/Category"
+        totalCoins:
+          type: integer
+        totalRecognitions:
+          type: integer
+        percentage:
+          type: number
+
+    MonthlyBalance:
+      type: object
+      required: [allocated, sent, available, month, year]
+      properties:
+        allocated:
+          type: integer
+        sent:
+          type: integer
+        available:
+          type: integer
+        month:
+          type: integer
+        year:
+          type: integer

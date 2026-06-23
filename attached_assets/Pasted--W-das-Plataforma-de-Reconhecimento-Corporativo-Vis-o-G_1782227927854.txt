@@ -1,0 +1,604 @@
+# Wédas - Plataforma de Reconhecimento Corporativo
+
+## Visão Geral
+
+O Wédas é uma plataforma interna de reconhecimento corporativo que substitui o processo manual atualmente realizado através de Google Forms e planilhas.
+
+A solução permite que colaboradores reconheçam colegas através do envio de Wédas (moedas de reconhecimento), associando cada reconhecimento a uma categoria estratégica da empresa e uma mensagem personalizada.
+
+O sistema automatiza toda a operação que hoje é executada manualmente pelo RH, incluindo consolidação de dados, relatórios, rankings, auditoria e cálculo de recompensas.
+
+---
+
+# Objetivos do Projeto
+
+## Objetivos de Negócio
+
+* Eliminar o processo manual realizado pelo RH.
+* Aumentar o engajamento dos colaboradores.
+* Incentivar a cultura de reconhecimento.
+* Gerar métricas sobre comportamento e colaboração.
+* Facilitar a conversão de Wédas em recompensas financeiras.
+* Criar transparência no programa de reconhecimento.
+
+## Objetivos Técnicos
+
+* Centralizar todos os reconhecimentos em uma única plataforma.
+* Garantir rastreabilidade completa.
+* Automatizar relatórios.
+* Permitir escalabilidade para crescimento da empresa.
+* Possibilitar futuras integrações com ERP, folha de pagamento e Microsoft Teams.
+
+---
+
+# Perfis de Usuário
+
+## Colaborador
+
+Pode:
+
+* Fazer login.
+* Visualizar dashboard pessoal.
+* Enviar Wédas para colegas.
+* Consultar histórico.
+* Visualizar reconhecimentos recebidos.
+* Acompanhar saldo disponível para envio.
+* Visualizar rankings.
+
+---
+
+## Gestor
+
+Possui todas as permissões do colaborador.
+
+Adicionalmente pode:
+
+* Visualizar métricas da equipe.
+* Filtrar dados por departamento.
+* Consultar indicadores de engajamento.
+
+---
+
+## RH / Administrador
+
+Possui acesso completo ao sistema.
+
+Pode:
+
+* Gerenciar usuários.
+* Criar categorias.
+* Definir regras de distribuição.
+* Configurar limite mensal.
+* Configurar conversão financeira.
+* Gerar relatórios.
+* Exportar dados.
+* Gerenciar permissões.
+
+---
+
+# Regras de Negócio
+
+## Regra 01 - Distribuição Mensal
+
+Todo colaborador recebe uma quantidade de Wédas para distribuir mensalmente.
+
+Exemplo:
+
+100 Wédas por mês.
+
+O valor deve ser configurável pelo RH.
+
+---
+
+## Regra 02 - Não é permitido enviar para si mesmo
+
+O sistema deve bloquear qualquer tentativa de auto reconhecimento.
+
+---
+
+## Regra 03 - Limite Mensal
+
+O usuário não pode enviar mais moedas do que possui disponível no mês.
+
+---
+
+## Regra 04 - Reconhecimento Obrigatório
+
+Todo envio deve conter:
+
+* Destinatário
+* Quantidade de Wédas
+* Categoria
+* Mensagem
+
+---
+
+## Regra 05 - Auditoria
+
+Nenhum reconhecimento pode ser apagado fisicamente.
+
+Caso necessário:
+
+* Marcar como cancelado.
+* Registrar usuário responsável.
+* Registrar data.
+
+---
+
+## Regra 06 - Conversão Financeira
+
+A conversão será configurada pelo RH.
+
+Exemplo:
+
+1 Wéda = R$ 0,10
+
+O sistema deve calcular automaticamente os valores acumulados por colaborador.
+
+---
+
+# Categorias de Reconhecimento
+
+Versão inicial:
+
+### 🤝 Trabalho em Equipe
+
+Reconhece colaboração e apoio entre colegas.
+
+### 💡 Inovação
+
+Reconhece novas ideias e melhorias.
+
+### ⭐ Excelência no Atendimento
+
+Reconhece qualidade no atendimento interno ou externo.
+
+### ✅ Qualidade na Entrega
+
+Reconhece comprometimento e qualidade dos resultados.
+
+O sistema deve permitir inclusão de novas categorias pelo RH.
+
+---
+
+# Fluxo Principal
+
+## Fluxo de Envio
+
+1. Usuário acessa a plataforma.
+2. Clica em "Enviar Wédas".
+3. Seleciona colaborador.
+4. Seleciona quantidade.
+5. Seleciona categoria.
+6. Escreve mensagem.
+7. Confirma envio.
+8. Sistema registra transação.
+9. Saldo é atualizado automaticamente.
+10. Destinatário recebe notificação.
+
+---
+
+# Telas do Sistema
+
+## Tela 01 - Login
+
+Campos:
+
+* E-mail corporativo
+* Senha
+
+Botões:
+
+* Entrar
+* Recuperar senha
+
+Futuro:
+
+* Login Microsoft
+* Login Google Workspace
+
+---
+
+## Tela 02 - Dashboard do Colaborador
+
+### Cards principais
+
+Saldo disponível
+
+Exemplo:
+
+75 Wédas restantes
+
+---
+
+Recebidas no mês
+
+Exemplo:
+
+120 Wédas
+
+---
+
+Valor acumulado
+
+Exemplo:
+
+R$ 12,00
+
+---
+
+Posição no ranking
+
+Exemplo:
+
+#5
+
+---
+
+### Feed de Reconhecimentos
+
+Exibe os últimos reconhecimentos recebidos.
+
+---
+
+## Tela 03 - Enviar Wédas
+
+### Passo 1
+
+Selecionar colaborador.
+
+Campo com busca inteligente.
+
+---
+
+### Passo 2
+
+Selecionar quantidade.
+
+Opções:
+
+* 2
+* 5
+* 10
+* 15
+* 20
+
+---
+
+### Passo 3
+
+Selecionar categoria.
+
+Cards visuais.
+
+---
+
+### Passo 4
+
+Mensagem.
+
+Máximo 300 caracteres.
+
+---
+
+### Passo 5
+
+Confirmação.
+
+Resumo da ação antes do envio.
+
+---
+
+## Tela 04 - Histórico
+
+Filtros:
+
+* Data
+* Categoria
+* Colaborador
+
+Exibir:
+
+* Recebidos
+* Enviados
+
+---
+
+## Tela 05 - Ranking
+
+Abas:
+
+### Mais Reconhecidos
+
+Quem recebeu mais Wédas.
+
+### Mais Engajados
+
+Quem mais reconheceu colegas.
+
+### Por Categoria
+
+Ranking por categoria.
+
+---
+
+## Tela 06 - Perfil do Usuário
+
+Dados:
+
+* Nome
+* Cargo
+* Departamento
+* Total de Wédas recebidas
+* Total de reconhecimentos recebidos
+* Histórico
+
+---
+
+## Tela 07 - Dashboard RH
+
+### Indicadores
+
+Total de Wédas distribuídas.
+
+---
+
+Total de reconhecimentos.
+
+---
+
+Média por colaborador.
+
+---
+
+Categoria mais utilizada.
+
+---
+
+Departamento mais engajado.
+
+---
+
+Ranking geral.
+
+---
+
+Evolução mensal.
+
+---
+
+# Relatórios
+
+## Relatório de Colaboradores
+
+* Nome
+* Cargo
+* Departamento
+* Recebidas
+* Enviadas
+
+---
+
+## Relatório Financeiro
+
+* Nome
+* Total de Wédas
+* Conversão monetária
+
+Pronto para folha de pagamento.
+
+---
+
+## Relatório de Categorias
+
+Quantidade de reconhecimentos por categoria.
+
+---
+
+## Relatório de Engajamento
+
+Participação dos colaboradores.
+
+---
+
+# Notificações
+
+## Ao Receber Wédas
+
+Mensagem:
+
+Você recebeu 10 Wédas de Rodrigo Freitas.
+
+Categoria:
+Trabalho em Equipe
+
+Mensagem:
+Obrigado pela ajuda no projeto.
+
+---
+
+## Lembrete
+
+Caso o usuário ainda possua saldo próximo do fim do mês.
+
+Exemplo:
+
+Você ainda possui 60 Wédas disponíveis para reconhecer colegas.
+
+---
+
+# Estrutura do Banco de Dados
+
+## users
+
+* id
+* name
+* email
+* password_hash
+* department
+* position
+* role
+* active
+* created_at
+
+---
+
+## categories
+
+* id
+* name
+* icon
+* active
+
+---
+
+## monthly_allocations
+
+* id
+* user_id
+* month
+* year
+* allocated_coins
+
+---
+
+## recognitions
+
+* id
+* sender_id
+* receiver_id
+* category_id
+* coins
+* message
+* status
+* created_at
+
+---
+
+## settings
+
+* id
+* coin_conversion_rate
+* monthly_coin_limit
+
+---
+
+# Stack Tecnológica
+
+Frontend:
+
+* React
+* TypeScript
+* TailwindCSS
+* Shadcn/UI
+
+Backend:
+
+* Node.js
+* Express
+
+Banco de Dados:
+
+* PostgreSQL
+
+Autenticação:
+
+* JWT
+* Microsoft OAuth
+* Google OAuth
+
+Hospedagem:
+
+* Vercel (Frontend)
+* Railway ou Render (Backend)
+* PostgreSQL Managed Database
+
+---
+
+# Design System
+
+## Estilo
+
+Corporate Modern
+
+Inspirado em:
+
+* Linear
+* Notion
+* Stripe
+* Slack
+
+---
+
+## Cores
+
+Primária:
+
+#2563EB
+
+Secundária:
+
+#0F172A
+
+Sucesso:
+
+#22C55E
+
+Aviso:
+
+#F59E0B
+
+Erro:
+
+#EF4444
+
+Fundo:
+
+#F8FAFC
+
+Cards:
+
+#FFFFFF
+
+---
+
+## Tipografia
+
+Fonte:
+
+Inter
+
+Pesos:
+
+400, 500, 600 e 700
+
+---
+
+# Roadmap Futuro
+
+Fase 1
+
+* MVP interno
+* Dashboard
+* Envio de Wédas
+* Histórico
+* Ranking
+* Relatórios RH
+
+Fase 2
+
+* Notificações por e-mail
+* Microsoft Teams
+* Slack
+
+Fase 3
+
+* Aplicativo Mobile
+* Gamificação avançada
+* Badges e conquistas
+
+Fase 4
+
+* Marketplace de recompensas
+* Catálogo de benefícios
+* Troca de Wédas por prêmios
