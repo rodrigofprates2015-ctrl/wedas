@@ -6,7 +6,6 @@ import {
   LayoutDashboard, 
   Send, 
   History, 
-  Trophy, 
   BarChart3, 
   FileText, 
   Settings, 
@@ -28,7 +27,6 @@ export function Sidebar() {
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
     { name: "Enviar Wédas", href: "/send", icon: Send },
     { name: "Histórico", href: "/history", icon: History },
-    { name: "Ranking", href: "/rankings", icon: Trophy },
   ];
 
   const adminNavigation = [

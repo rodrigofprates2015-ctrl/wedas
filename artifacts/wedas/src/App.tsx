@@ -8,7 +8,6 @@ import LoginPage from "@/pages/login";
 import DashboardPage from "@/pages/dashboard";
 import SendPage from "@/pages/send";
 import HistoryPage from "@/pages/history";
-import RankingsPage from "@/pages/rankings";
 import HrDashboardPage from "@/pages/hr-dashboard";
 import ReportsPage from "@/pages/reports";
 import SettingsPage from "@/pages/settings-page";
@@ -54,9 +53,6 @@ function Router() {
         </Route>
         <Route path="/history">
           <ProtectedRoute component={HistoryPage} />
-        </Route>
-        <Route path="/rankings">
-          <ProtectedRoute component={RankingsPage} />
         </Route>
         <Route path="/hr-dashboard">
           <ProtectedRoute component={HrDashboardPage} roles={["hr", "manager"]} />

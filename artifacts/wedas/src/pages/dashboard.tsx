@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Link } from "wouter";
-import { Coins, TrendingUp, TrendingDown, DollarSign, Trophy, ArrowRight, Infinity } from "lucide-react";
+import { Coins, TrendingUp, TrendingDown, DollarSign, ArrowRight, Infinity } from "lucide-react";
 
 function StatCard({ title, value, sub, icon: Icon, accent, warn }: {
   title: string;
@@ -128,7 +128,7 @@ export default function DashboardPage() {
           {/* Mandatory to send section */}
           <div>
             <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-3">Wédas a enviar</h2>
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <StatCard
                 title="A enviar este mês"
                 value={`${availableToSend} Wédas`}
@@ -142,12 +142,6 @@ export default function DashboardPage() {
                 value={sentThisMonth}
                 sub={`de ${mandatoryToSend} Wédas`}
                 icon={TrendingDown}
-              />
-              <StatCard
-                title="Posição no ranking"
-                value={dashboard?.rankingPosition ? `#${dashboard.rankingPosition}` : "—"}
-                sub="entre colaboradores"
-                icon={Trophy}
               />
             </div>
           </div>
