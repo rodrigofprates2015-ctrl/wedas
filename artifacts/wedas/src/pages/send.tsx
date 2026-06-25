@@ -134,7 +134,7 @@ export default function SendPage() {
         <div className="space-y-4">
           <h2 className="text-lg font-semibold">Quantas Wédas enviar para <span className="text-primary">{selectedUser?.name}</span>?</h2>
           <div className="grid grid-cols-5 gap-3">
-            {COIN_OPTIONS.filter(c => c <= available).map((coins) => (
+            {COIN_OPTIONS.filter(c => isUnlimited || c <= available).map((coins) => (
               <button
                 key={coins}
                 onClick={() => setSelectedCoins(coins)}
@@ -146,7 +146,7 @@ export default function SendPage() {
               </button>
             ))}
           </div>
-          {available === 0 && <p className="text-sm text-destructive">Você não tem saldo disponível este mês.</p>}
+          {!isUnlimited && available === 0 && <p className="text-sm text-destructive">Você não tem saldo disponível este mês.</p>}
           <div className="flex gap-3 pt-2">
             <Button variant="outline" onClick={() => setStep(1)}><ArrowLeft className="mr-2 h-4 w-4" /> Voltar</Button>
             <Button disabled={!selectedCoins} onClick={() => setStep(3)} data-testid="button-next-step2">Continuar <ChevronRight className="ml-2 h-4 w-4" /></Button>
