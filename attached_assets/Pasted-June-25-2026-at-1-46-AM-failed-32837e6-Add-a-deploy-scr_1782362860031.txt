@@ -1,0 +1,44 @@
+June 25, 2026 at 1:46 AM
+failed
+32837e6
+Add a deploy script and make seeding idempotent Updates package.json to include a new 'deploy' script that handles building, schema migration, and conditional seeding. Modifies the seeding script to check for existing data and only run if the database is empty, preventing data loss. Replit-Commit-Author: Agent Replit-Commit-Session-Id: 7e2ea159-aa90-438f-a5b4-47bd9c8d4ad4 Replit-Commit-Checkpoint-Type: full_checkpoint Replit-Commit-Event-Id: 94d6ed09-6139-484d-9624-c55b03df0851 Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/67f0ee01-bd87-4da5-8fc3-cc364808c2da/7e2ea159-aa90-438f-a5b4-47bd9c8d4ad4/iizW5mK Replit-Helium-Checkpoint-Created: true
+
+Rollback
+Exited with status 1 while building your code.
+Read our docs for common ways to troubleshoot your deploy.
+
+All logs
+Search
+Search logs
+
+Live tail
+
+
+
+==> Downloading cache...
+==> Cloning from https://github.com/rodrigofprates2015-ctrl/wedas
+==> Checking out commit 32837e6e388e65ef73a045f1932d99d4fff7be77 in branch main
+==> Downloaded 94MB in 7s. Extraction took 4s.
+==> Using Node.js version 24.14.1 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Running build command 'pnpm install --frozen-lockfile; pnpm run deploy'...
+> workspace@0.0.0 deploy /opt/render/project/src
+> pnpm run build && pnpm --filter @workspace/db run push-force && pnpm --filter @workspace/scripts run seed
+> workspace@0.0.0 build /opt/render/project/src
+> pnpm run typecheck && pnpm -r --filter "!@workspace/mockup-sandbox" --if-present run build
+> workspace@0.0.0 typecheck /opt/render/project/src
+> pnpm run typecheck:libs && pnpm -r --filter "./artifacts/**" --filter "./scripts" --if-present run typecheck
+> workspace@0.0.0 typecheck:libs /opt/render/project/src
+> tsc --build
+> @workspace/db@0.0.0 push-force /opt/render/project/src/lib/db
+> drizzle-kit push --force --config ./drizzle.config.ts
+Reading config file '/opt/render/project/src/lib/db/drizzle.config.ts'
+Using 'pg' driver for database querying
+[⣷] Pulling schema from database...
+[⣷] Pulling schema from database...
+/opt/render/project/src/lib/db:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/db@0.0.0 push-force: `drizzle-kit push --force --config ./drizzle.config.ts`
+Exit status 1
+ ELIFECYCLE  Command failed with exit code 1.
+==> Build failed 😞
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
