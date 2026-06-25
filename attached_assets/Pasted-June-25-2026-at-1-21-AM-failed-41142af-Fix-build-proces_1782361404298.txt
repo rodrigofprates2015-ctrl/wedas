@@ -1,0 +1,45 @@
+June 25, 2026 at 1:21 AM
+failed
+41142af
+Fix build process to correctly handle environment variables and exclude specific packages Adjust `artifacts/wedas/vite.config.ts` to make PORT and BASE_PATH optional during build, and modify `package.json` to exclude `@workspace/mockup-sandbox` from the build script. Replit-Commit-Author: Agent Replit-Commit-Session-Id: 7e2ea159-aa90-438f-a5b4-47bd9c8d4ad4 Replit-Commit-Checkpoint-Type: full_checkpoint Replit-Commit-Event-Id: 635b5569-d339-48f8-a903-303330f04db8 Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/67f0ee01-bd87-4da5-8fc3-cc364808c2da/7e2ea159-aa90-438f-a5b4-47bd9c8d4ad4/iizW5mK Replit-Helium-Checkpoint-Created: true
+
+Rollback
+Exited with status 1 while running your code.
+Read our docs for common ways to troubleshoot your deploy.
+
+All logs
+Search
+Search logs
+
+Live tail
+
+
+
+==> Cloning from https://github.com/rodrigofprates2015-ctrl/wedas
+==> Checking out commit 41142af140a72a6afc62be055f93699208ced691 in branch main
+==> Using Node.js version 24.14.1 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Running build command 'pnpm install --frozen-lockfile; pnpm run build'...
+> workspace@0.0.0 build /opt/render/project/src
+> pnpm run typecheck && pnpm -r --filter "!@workspace/mockup-sandbox" --if-present run build
+> workspace@0.0.0 typecheck /opt/render/project/src
+> pnpm run typecheck:libs && pnpm -r --filter "./artifacts/**" --filter "./scripts" --if-present run typecheck
+> workspace@0.0.0 typecheck:libs /opt/render/project/src
+> tsc --build
+==> Uploading build...
+==> Uploaded in 8.1s. Compression took 4.3s
+==> Build successful 🎉
+==> Deploying...
+==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+==> Running 'npm run start'
+npm error Missing script: "start"
+npm error
+npm error Did you mean one of these?
+npm error   npm star # Mark your favorite packages
+npm error   npm stars # View packages marked as favorites
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+npm error A complete log of this run can be found in: /opt/render/.cache/_logs/2026-06-25T04_22_58_969Z-debug-0.log
+==> Exited with status 1
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
