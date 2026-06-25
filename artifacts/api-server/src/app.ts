@@ -38,7 +38,7 @@ app.use("/api", router);
 // Serve frontend static files in production
 const frontendDist = path.resolve(__dirname, "../../wedas/dist/public");
 app.use(express.static(frontendDist));
-app.get("*", (_req, res) => {
+app.get("/{*path}", (_req, res) => {
   res.sendFile(path.join(frontendDist, "index.html"));
 });
 
