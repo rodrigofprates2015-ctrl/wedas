@@ -1,0 +1,52 @@
+June 25, 2026 at 1:49 AM
+failed
+5dbf4eb
+Enable secure database connections for production environments Adjust database connection configurations to enforce SSL for production environments, specifically addressing issues with external database connections on platforms like Render. Replit-Commit-Author: Agent Replit-Commit-Session-Id: 7e2ea159-aa90-438f-a5b4-47bd9c8d4ad4 Replit-Commit-Checkpoint-Type: full_checkpoint Replit-Commit-Event-Id: 14486ee3-acfb-42c5-8a87-a966bd6acc88 Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/67f0ee01-bd87-4da5-8fc3-cc364808c2da/7e2ea159-aa90-438f-a5b4-47bd9c8d4ad4/iizW5mK Replit-Helium-Checkpoint-Created: true
+
+Rollback
+Exited with status 1 while building your code.
+Read our docs for common ways to troubleshoot your deploy.
+
+All logs
+Search
+Search logs
+
+Jun 25, 1:48 AM - 1:51 AM
+GMT-3
+
+
+
+==> Downloading cache...
+==> Cloning from https://github.com/rodrigofprates2015-ctrl/wedas
+==> Checking out commit 5dbf4eb842a182f6608db6460e69420fc9ff624c in branch main
+==> Downloaded 94MB in 9s. Extraction took 6s.
+==> Using Node.js version 24.14.1 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Running build command 'pnpm install --frozen-lockfile; pnpm run deploy'...
+> workspace@0.0.0 deploy /opt/render/project/src
+> pnpm run build && pnpm --filter @workspace/db run push-force && pnpm --filter @workspace/scripts run seed
+> workspace@0.0.0 build /opt/render/project/src
+> pnpm run typecheck && pnpm -r --filter "!@workspace/mockup-sandbox" --if-present run build
+> workspace@0.0.0 typecheck /opt/render/project/src
+> pnpm run typecheck:libs && pnpm -r --filter "./artifacts/**" --filter "./scripts" --if-present run typecheck
+> workspace@0.0.0 typecheck:libs /opt/render/project/src
+> tsc --build
+> @workspace/db@0.0.0 push-force /opt/render/project/src/lib/db
+> drizzle-kit push --force --config ./drizzle.config.ts
+Reading config file '/opt/render/project/src/lib/db/drizzle.config.ts'
+Using 'pg' driver for database querying
+[⣷] Pulling schema from database...
+(node:360) Warning: SECURITY WARNING: The SSL modes 'prefer', 'require', and 'verify-ca' are treated as aliases for 'verify-full'.
+In the next major version (pg-connection-string v3.0.0 and pg v9.0.0), these modes will adopt standard libpq semantics, which have weaker security guarantees.
+To prepare for this change:
+- If you want the current behavior, explicitly use 'sslmode=verify-full'
+- If you want libpq compatibility now, use 'uselibpqcompat=true&sslmode=require'
+See https://www.postgresql.org/docs/current/libpq-ssl.html for libpq SSL mode definitions.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[⣷] Pulling schema from database...
+/opt/render/project/src/lib/db:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/db@0.0.0 push-force: `drizzle-kit push --force --config ./drizzle.config.ts`
+Exit status 1
+ ELIFECYCLE  Command failed with exit code 1.
+==> Build failed 😞
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
