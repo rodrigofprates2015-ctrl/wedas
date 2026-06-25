@@ -1,0 +1,76 @@
+June 25, 2026 at 1:25 AM
+failed
+21902c2
+Add ability for the API server to serve frontend files and include a start script Adds static file serving to the API server and a `start` script to the root `package.json` for deployment. Replit-Commit-Author: Agent Replit-Commit-Session-Id: 7e2ea159-aa90-438f-a5b4-47bd9c8d4ad4 Replit-Commit-Checkpoint-Type: full_checkpoint Replit-Commit-Event-Id: bda30743-ca70-44cc-a038-3b3f4e41631f Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/67f0ee01-bd87-4da5-8fc3-cc364808c2da/7e2ea159-aa90-438f-a5b4-47bd9c8d4ad4/iizW5mK Replit-Helium-Checkpoint-Created: true
+
+Rollback
+Exited with status 1 while running your code.
+Read our docs for common ways to troubleshoot your deploy.
+
+All logs
+Search
+Search logs
+
+Jun 25, 1:24 AM - 1:28 AM
+GMT-3
+
+
+
+==> Downloading cache...
+==> Cloning from https://github.com/rodrigofprates2015-ctrl/wedas
+==> Checking out commit 21902c21a76cd3f0d1aada34bfeb1bc1d96d2868 in branch main
+==> Downloaded 94MB in 9s. Extraction took 5s.
+==> Using Node.js version 24.14.1 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Running build command 'pnpm install --frozen-lockfile; pnpm run build'...
+> workspace@0.0.0 build /opt/render/project/src
+> pnpm run typecheck && pnpm -r --filter "!@workspace/mockup-sandbox" --if-present run build
+> workspace@0.0.0 typecheck /opt/render/project/src
+> pnpm run typecheck:libs && pnpm -r --filter "./artifacts/**" --filter "./scripts" --if-present run typecheck
+> workspace@0.0.0 typecheck:libs /opt/render/project/src
+> tsc --build
+==> Uploading build...
+==> Uploaded in 12.2s. Compression took 4.5s
+==> Build successful 🎉
+==> Deploying...
+==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+==> Running 'npm run start'
+> workspace@0.0.0 start
+> pnpm --filter @workspace/api-server run start
+> @workspace/api-server@0.0.0 start /opt/render/project/src/artifacts/api-server
+> node --enable-source-maps ./dist/index.mjs
+/opt/render/project/src/lib/db/src/index.ts:8
+  throw new Error(
+        ^
+Error: DATABASE_URL must be set. Did you forget to provision a database?
+    at ../../lib/db/src/index.ts (/opt/render/project/src/lib/db/src/index.ts:8:9)
+    at __init (file:///opt/render/project/src/artifacts/api-server/dist/index.mjs:22:56)
+    at <anonymous> (/opt/render/project/src/artifacts/api-server/src/routes/auth.ts:3:1)
+    at ModuleJob.run (node:internal/modules/esm/module_job:430:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:661:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+Node.js v24.14.1
+/opt/render/project/src/artifacts/api-server:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/api-server@0.0.0 start: `node --enable-source-maps ./dist/index.mjs`
+Exit status 1
+==> Exited with status 1
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+==> Running 'npm run start'
+> workspace@0.0.0 start
+> pnpm --filter @workspace/api-server run start
+> @workspace/api-server@0.0.0 start /opt/render/project/src/artifacts/api-server
+> node --enable-source-maps ./dist/index.mjs
+/opt/render/project/src/lib/db/src/index.ts:8
+  throw new Error(
+        ^
+Error: DATABASE_URL must be set. Did you forget to provision a database?
+    at ../../lib/db/src/index.ts (/opt/render/project/src/lib/db/src/index.ts:8:9)
+    at __init (file:///opt/render/project/src/artifacts/api-server/dist/index.mjs:22:56)
+    at <anonymous> (/opt/render/project/src/artifacts/api-server/src/routes/auth.ts:3:1)
+    at ModuleJob.run (node:internal/modules/esm/module_job:430:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:661:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+Node.js v24.14.1
+/opt/render/project/src/artifacts/api-server:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/api-server@0.0.0 start: `node --enable-source-maps ./dist/index.mjs`
+Exit status 1
