@@ -66,8 +66,8 @@
 }
 
 :root {
-  /* Brand Primary: #2563EB */
-  --primary: 221 83% 53%;
+  /* Brand Primary: #0091a6 */
+  --primary: 188 100% 33%;
   --primary-foreground: 0 0% 100%;
 
   /* Background: #F8FAFC */
@@ -81,7 +81,7 @@
 
   --border: 214 32% 91%;
   --input: 214 32% 91%;
-  --ring: 221 83% 53%;
+  --ring: 188 100% 33%;
 
   --popover: 0 0% 100%;
   --popover-foreground: 222 47% 11%;
@@ -111,11 +111,11 @@
   --sidebar: 0 0% 100%;
   --sidebar-foreground: 222 47% 11%;
   --sidebar-border: 214 32% 91%;
-  --sidebar-primary: 221 83% 53%;
+  --sidebar-primary: 188 100% 33%;
   --sidebar-primary-foreground: 0 0% 100%;
   --sidebar-accent: 210 40% 96.1%;
   --sidebar-accent-foreground: 222.2 47.4% 11.2%;
-  --sidebar-ring: 221 83% 53%;
+  --sidebar-ring: 188 100% 33%;
 
   --app-font-sans: 'Inter', sans-serif;
   --radius: 0.5rem;
@@ -138,13 +138,13 @@
 
   --border: 217 33% 17%;
   --input: 217 33% 17%;
-  --ring: 221 83% 53%;
+  --ring: 188 100% 33%;
 
   --popover: 222 47% 11%;
   --popover-foreground: 210 40% 98%;
   --popover-border: 217 33% 17%;
 
-  --primary: 221 83% 53%;
+  --primary: 188 100% 33%;
   --primary-foreground: 0 0% 100%;
 
   --secondary: 217.2 32.6% 17.5%;
@@ -168,11 +168,11 @@
   --sidebar: 222 47% 11%;
   --sidebar-foreground: 210 40% 98%;
   --sidebar-border: 217 33% 17%;
-  --sidebar-primary: 221 83% 53%;
+  --sidebar-primary: 188 100% 33%;
   --sidebar-primary-foreground: 0 0% 100%;
   --sidebar-accent: 217.2 32.6% 17.5%;
   --sidebar-accent-foreground: 210 40% 98%;
-  --sidebar-ring: 221 83% 53%;
+  --sidebar-ring: 188 100% 33%;
   
   --button-outline: rgba(255,255,255, .10);
   --badge-outline: rgba(255,255,255, .05);
