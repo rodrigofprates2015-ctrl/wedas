@@ -85,19 +85,22 @@ router.post("/recognitions", requireAuth, async (req, res): Promise<void> => {
   }
 
   const senderId = req.userId!;
+  const role = req.userRole ?? "employee";
 
   if (parsed.data.receiverId === senderId) {
     res.status(400).json({ error: "Você não pode enviar Wédas para si mesmo" });
     return;
   }
 
-  const allocation = await ensureMonthlyAllocation(senderId);
-  const sent = await getSentThisMonth(senderId);
-  const available = allocation.allocatedCoins - sent;
+  if (role !== "hr") {
+    const allocation = await ensureMonthlyAllocation(senderId, role);
+    const sent = await getSentThisMonth(senderId);
+    const available = Math.max(0, allocation.allocatedCoins - sent);
 
-  if (parsed.data.coins > available) {
-    res.status(400).json({ error: `Saldo insuficiente. Você tem ${available} Wédas disponíveis` });
-    return;
+    if (parsed.data.coins > available) {
+      res.status(400).json({ error: `Saldo insuficiente. Você tem ${available} Wédas disponíveis` });
+      return;
+    }
   }
 
   const [recognition] = await db

@@ -337,10 +337,12 @@ export const GetRankingByCategoryResponse = zod.array(GetRankingByCategoryRespon
  * @summary Get personal dashboard stats
  */
 export const GetMyDashboardResponse = zod.object({
-  "availableBalance": zod.number(),
-  "allocatedThisMonth": zod.number(),
+  "availableBalance": zod.number().nullish(),
+  "mandatoryToSend": zod.number().nullish(),
+  "isUnlimited": zod.boolean(),
+  "allocatedThisMonth": zod.number().optional(),
   "receivedThisMonth": zod.number(),
-  "sentThisMonth": zod.number().optional(),
+  "sentThisMonth": zod.number(),
   "accumulatedValue": zod.number(),
   "rankingPosition": zod.number().nullable(),
   "recentRecognitions": zod.array(zod.object({
@@ -489,9 +491,10 @@ export const GetCategoriesReportResponse = zod.array(GetCategoriesReportResponse
  * @summary Get my current monthly balance
  */
 export const GetMyBalanceResponse = zod.object({
-  "allocated": zod.number(),
+  "mandatoryToSend": zod.number().nullish(),
   "sent": zod.number(),
-  "available": zod.number(),
+  "available": zod.number().nullish(),
+  "isUnlimited": zod.boolean(),
   "month": zod.number(),
   "year": zod.number()
 })

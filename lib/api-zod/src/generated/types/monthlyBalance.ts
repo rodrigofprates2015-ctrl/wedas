@@ -7,9 +7,12 @@
  */
 
 export interface MonthlyBalance {
-  allocated: number;
+  /** @nullable */
+  mandatoryToSend?: number | null;
   sent: number;
-  available: number;
+  /** @nullable */
+  available?: number | null;
+  isUnlimited: boolean;
   month: number;
   year: number;
 }

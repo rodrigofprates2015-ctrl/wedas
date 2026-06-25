@@ -674,10 +674,14 @@ components:
 
     PersonalDashboard:
       type: object
-      required: [availableBalance, allocatedThisMonth, receivedThisMonth, accumulatedValue, rankingPosition, recentRecognitions]
+      required: [isUnlimited, receivedThisMonth, sentThisMonth, accumulatedValue, rankingPosition, recentRecognitions]
       properties:
         availableBalance:
-          type: integer
+          type: ["integer", "null"]
+        mandatoryToSend:
+          type: ["integer", "null"]
+        isUnlimited:
+          type: boolean
         allocatedThisMonth:
           type: integer
         receivedThisMonth:
@@ -789,14 +793,16 @@ components:
 
     MonthlyBalance:
       type: object
-      required: [allocated, sent, available, month, year]
+      required: [sent, isUnlimited, month, year]
       properties:
-        allocated:
-          type: integer
+        mandatoryToSend:
+          type: ["integer", "null"]
         sent:
           type: integer
         available:
-          type: integer
+          type: ["integer", "null"]
+        isUnlimited:
+          type: boolean
         month:
           type: integer
         year:

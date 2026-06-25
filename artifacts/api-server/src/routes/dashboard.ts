@@ -8,14 +8,18 @@ const router = Router();
 
 router.get("/dashboard/me", requireAuth, async (req, res): Promise<void> => {
   const userId = req.userId!;
+  const role = req.userRole ?? "employee";
 
   const now = new Date();
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
   const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
 
-  const allocation = await ensureMonthlyAllocation(userId);
+  const allocation = await ensureMonthlyAllocation(userId, role);
   const sentThisMonth = await getSentThisMonth(userId);
-  const available = allocation.allocatedCoins - sentThisMonth;
+
+  const isUnlimited = allocation.isUnlimited;
+  const mandatoryToSend = isUnlimited ? null : allocation.allocatedCoins;
+  const availableBalance = isUnlimited ? null : Math.max(0, allocation.allocatedCoins - sentThisMonth);
 
   const receivedResult = await db
     .select({ total: sum(recognitionsTable.coins) })
@@ -96,7 +100,9 @@ router.get("/dashboard/me", requireAuth, async (req, res): Promise<void> => {
   );
 
   res.json({
-    availableBalance: available,
+    availableBalance,
+    mandatoryToSend,
+    isUnlimited,
     allocatedThisMonth: allocation.allocatedCoins,
     receivedThisMonth,
     sentThisMonth,
@@ -186,7 +192,6 @@ router.get("/dashboard/hr", requireAuth, requireRole("hr", "manager"), async (_r
     a.year !== b.year ? a.year - b.year : a.month - b.month
   );
 
-  const senderIds = [...new Set(allRows.map(() => 0))];
   const engagementRate = activeUsers > 0 ? Math.min(100, (totalRecognitions / activeUsers) * 10) : 0;
 
   res.json({

@@ -147,10 +147,14 @@ export interface CategoryRankingEntry {
 }
 
 export interface PersonalDashboard {
-  availableBalance: number;
-  allocatedThisMonth: number;
+  /** @nullable */
+  availableBalance?: number | null;
+  /** @nullable */
+  mandatoryToSend?: number | null;
+  isUnlimited: boolean;
+  allocatedThisMonth?: number;
   receivedThisMonth: number;
-  sentThisMonth?: number;
+  sentThisMonth: number;
   accumulatedValue: number;
   /** @nullable */
   rankingPosition: number | null;
@@ -208,9 +212,12 @@ export interface CategoryReportEntry {
 }
 
 export interface MonthlyBalance {
-  allocated: number;
+  /** @nullable */
+  mandatoryToSend?: number | null;
   sent: number;
-  available: number;
+  /** @nullable */
+  available?: number | null;
+  isUnlimited: boolean;
   month: number;
   year: number;
 }

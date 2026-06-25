@@ -8,10 +8,14 @@
 import type { Recognition } from './recognition';
 
 export interface PersonalDashboard {
-  availableBalance: number;
-  allocatedThisMonth: number;
+  /** @nullable */
+  availableBalance?: number | null;
+  /** @nullable */
+  mandatoryToSend?: number | null;
+  isUnlimited: boolean;
+  allocatedThisMonth?: number;
   receivedThisMonth: number;
-  sentThisMonth?: number;
+  sentThisMonth: number;
   accumulatedValue: number;
   /** @nullable */
   rankingPosition: number | null;

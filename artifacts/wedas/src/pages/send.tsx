@@ -56,6 +56,7 @@ export default function SendPage() {
     }
   };
 
+  const isUnlimited = balance?.isUnlimited === true;
   const available = balance?.available ?? 0;
 
   const steps = [
@@ -70,7 +71,7 @@ export default function SendPage() {
     <div className="max-w-2xl mx-auto space-y-8">
       <div>
         <h1 className="text-2xl font-bold">Enviar Wédas</h1>
-        <p className="text-muted-foreground mt-1">Saldo disponível: <span className="font-semibold text-primary">{available} Wédas</span></p>
+        <p className="text-muted-foreground mt-1">Saldo disponível: <span className="font-semibold text-primary">{isUnlimited ? "Ilimitado" : `${available} Wédas`}</span></p>
       </div>
 
       {/* Step indicator */}

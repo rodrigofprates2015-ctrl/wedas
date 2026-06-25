@@ -1,10 +1,18 @@
-import { db, monthlyAllocationsTable, settingsTable, usersTable } from "@workspace/db";
+import { db, monthlyAllocationsTable, usersTable } from "@workspace/db";
 import { eq, and } from "drizzle-orm";
 
-export async function ensureMonthlyAllocation(userId: number): Promise<{ allocatedCoins: number }> {
+const HR_COINS = 999999;
+const EMPLOYEE_MANDATORY_COINS = 20;
+
+export async function ensureMonthlyAllocation(
+  userId: number,
+  role = "employee"
+): Promise<{ allocatedCoins: number; isUnlimited: boolean }> {
   const now = new Date();
   const month = now.getMonth() + 1;
   const year = now.getFullYear();
+  const isUnlimited = role === "hr";
+  const limit = isUnlimited ? HR_COINS : EMPLOYEE_MANDATORY_COINS;
 
   const existing = await db
     .select()
@@ -18,18 +26,15 @@ export async function ensureMonthlyAllocation(userId: number): Promise<{ allocat
     );
 
   if (existing.length > 0) {
-    return { allocatedCoins: existing[0].allocatedCoins };
+    return { allocatedCoins: existing[0].allocatedCoins, isUnlimited };
   }
-
-  const [settings] = await db.select().from(settingsTable).limit(1);
-  const limit = settings?.monthlyCoinLimit ?? 100;
 
   const [allocation] = await db
     .insert(monthlyAllocationsTable)
     .values({ userId, month, year, allocatedCoins: limit })
     .returning();
 
-  return { allocatedCoins: allocation.allocatedCoins };
+  return { allocatedCoins: allocation.allocatedCoins, isUnlimited };
 }
 
 export async function getSentThisMonth(userId: number): Promise<number> {
@@ -59,8 +64,11 @@ export async function getSentThisMonth(userId: number): Promise<number> {
 }
 
 export async function ensureAllUsersHaveAllocations(): Promise<void> {
-  const users = await db.select({ id: usersTable.id }).from(usersTable).where(eq(usersTable.active, true));
+  const users = await db
+    .select({ id: usersTable.id, role: usersTable.role })
+    .from(usersTable)
+    .where(eq(usersTable.active, true));
   for (const user of users) {
-    await ensureMonthlyAllocation(user.id);
+    await ensureMonthlyAllocation(user.id, user.role);
   }
 }
