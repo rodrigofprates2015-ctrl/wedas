@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useListUsers, useCreateUser, useUpdateUser, getListUsersQueryKey } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -31,6 +31,18 @@ function UserFormDialog({ open, onClose, user }: { open: boolean; onClose: () =>
     role: user?.role ?? "employee",
     active: user?.active !== undefined ? String(user.active) : "true",
   });
+
+  useEffect(() => {
+    setForm({
+      name: user?.name ?? "",
+      email: user?.email ?? "",
+      password: "",
+      department: user?.department ?? "",
+      position: user?.position ?? "",
+      role: user?.role ?? "employee",
+      active: user?.active !== undefined ? String(user.active) : "true",
+    });
+  }, [user]);
 
   const handleChange = (field: string, value: string) => setForm((f) => ({ ...f, [field]: value }));
 
