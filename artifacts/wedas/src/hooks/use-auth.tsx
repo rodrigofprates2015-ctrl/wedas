@@ -1,7 +1,9 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useLocation } from "wouter";
-import { useGetMe, useLogin, useLogout } from "@workspace/api-client-react";
+import { useGetMe, useLogin, useLogout, setAuthTokenGetter } from "@workspace/api-client-react";
 import type { LoginInput, User } from "@workspace/api-client-react";
+
+setAuthTokenGetter(() => localStorage.getItem("wedas_token"));
 
 interface AuthContextType {
   user: User | null;
@@ -43,19 +45,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setToken(null);
     setLocation("/login");
   };
-
-  useEffect(() => {
-    // Intercept customFetch to inject token if available
-    const originalFetch = window.fetch;
-    window.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
-      let headers = new Headers(init?.headers);
-      const currentToken = localStorage.getItem("wedas_token");
-      if (currentToken) {
-        headers.set("Authorization", `Bearer ${currentToken}`);
-      }
-      return originalFetch(input, { ...init, headers });
-    };
-  }, []);
 
   return (
     <AuthContext.Provider
