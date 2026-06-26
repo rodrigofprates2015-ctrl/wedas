@@ -46,28 +46,33 @@ export default function LoginPage() {
             <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
               <Coins className="h-6 w-6 text-white" />
             </div>
-            <span className="text-2xl font-bold tracking-tight">Wédas</span>
+            <span className="text-2xl font-bold tracking-tight" style={{ fontFamily: "'Raleway', sans-serif" }}>Wédas</span>
           </div>
           <div>
-            <blockquote className="text-3xl font-semibold leading-snug mb-6">
-              "Reconhecer é mais do que agradecer — é construir uma cultura de excelência."
+            <blockquote
+              className="font-semibold leading-tight mb-8"
+              style={{ fontFamily: "'Raleway', sans-serif", fontSize: "2rem" }}
+            >
+              "Reconhecer é mais do que<br />
+              agradecer: é construir uma<br />
+              cultura de excelência."
             </blockquote>
-            <div className="flex gap-6 mt-8">
+            <div className="flex gap-10">
               <div>
-                <div className="text-3xl font-bold text-primary">10x</div>
-                <div className="text-sm text-slate-400 mt-1">mais engajamento</div>
+                <div className="text-4xl font-extrabold text-primary" style={{ fontFamily: "'Raleway', sans-serif" }}>10x</div>
+                <div className="text-xs text-slate-300 mt-1 uppercase tracking-wide">mais engajamento</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-primary">100%</div>
-                <div className="text-sm text-slate-400 mt-1">rastreável</div>
+                <div className="text-4xl font-extrabold text-primary" style={{ fontFamily: "'Raleway', sans-serif" }}>100%</div>
+                <div className="text-xs text-slate-300 mt-1 uppercase tracking-wide">rastreável</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-primary">0</div>
-                <div className="text-sm text-slate-400 mt-1">planilhas</div>
+                <div className="text-4xl font-extrabold text-primary" style={{ fontFamily: "'Raleway', sans-serif" }}>0</div>
+                <div className="text-xs text-slate-300 mt-1 uppercase tracking-wide">planilhas</div>
               </div>
             </div>
           </div>
-          <div className="text-sm text-slate-500">Plataforma interna de reconhecimento corporativo</div>
+          <div className="text-xs text-slate-500 uppercase tracking-widest">Plataforma interna de reconhecimento corporativo</div>
         </div>
       </div>
 
