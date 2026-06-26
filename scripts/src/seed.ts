@@ -45,13 +45,24 @@ async function seed() {
     return;
   }
 
+  // Always ensure the RH admin user exists (upsert by email)
+  await db.insert(schema.usersTable).values({
+    name: "Bruno Dener de Campos Oliveira",
+    email: "rh@wedas.com",
+    passwordHash: await bcrypt.hash("senha123", 10),
+    department: "Recursos Humanos",
+    position: "Analista de RH",
+    role: "hr",
+    active: true,
+  }).onConflictDoNothing();
+
   if (userCount > 0) {
-    console.log(`Banco já possui ${userCount} usuário(s) — seed ignorado.`);
+    console.log(`Banco já possui ${userCount} usuário(s) — seed de dados completo ignorado (admin garantido).`);
     await pool.end();
     return;
   }
 
-  console.log("Banco vazio — executando seed...");
+  console.log("Banco vazio — executando seed completo...");
 
   const hash = async (p: string) => bcrypt.hash(p, 10);
 
