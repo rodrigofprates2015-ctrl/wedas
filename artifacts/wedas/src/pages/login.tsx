@@ -133,7 +133,7 @@ export default function LoginPage() {
           <div className="mt-8 p-4 rounded-lg bg-muted text-sm text-muted-foreground">
             <p className="font-medium mb-1">Credenciais de demonstração:</p>
             <p>RH: rh@wedas.com / senha123</p>
-            <p>Colaborador: rodrigo@wedas.com / senha123</p>
+            <p>Colaborador: gabriel.garcia@wedas.com / senha123</p>
           </div>
         </div>
       </div>
