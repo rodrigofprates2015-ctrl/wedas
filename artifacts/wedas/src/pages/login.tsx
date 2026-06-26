@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Coins, AlertCircle } from "lucide-react";
+import heroBg from "@assets/bh_home_1782438117211.png";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -31,33 +32,43 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex bg-background">
       {/* Left panel */}
-      <div className="hidden lg:flex lg:w-1/2 flex-col justify-between bg-[#0F172A] p-12 text-white">
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
-            <Coins className="h-6 w-6 text-white" />
+      <div
+        className="hidden lg:flex lg:w-1/2 flex-col justify-between p-12 text-white relative overflow-hidden"
+        style={{
+          backgroundImage: `url(${heroBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="absolute inset-0 bg-[#0F172A]/70" />
+        <div className="relative z-10 flex flex-col justify-between h-full">
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
+              <Coins className="h-6 w-6 text-white" />
+            </div>
+            <span className="text-2xl font-bold tracking-tight">Wédas</span>
           </div>
-          <span className="text-2xl font-bold tracking-tight">Wédas</span>
-        </div>
-        <div>
-          <blockquote className="text-3xl font-semibold leading-snug mb-6">
-            "Reconhecer é mais do que agradecer — é construir uma cultura de excelência."
-          </blockquote>
-          <div className="flex gap-6 mt-8">
-            <div>
-              <div className="text-3xl font-bold text-primary">10x</div>
-              <div className="text-sm text-slate-400 mt-1">mais engajamento</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-primary">100%</div>
-              <div className="text-sm text-slate-400 mt-1">rastreável</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-primary">0</div>
-              <div className="text-sm text-slate-400 mt-1">planilhas</div>
+          <div>
+            <blockquote className="text-3xl font-semibold leading-snug mb-6">
+              "Reconhecer é mais do que agradecer — é construir uma cultura de excelência."
+            </blockquote>
+            <div className="flex gap-6 mt-8">
+              <div>
+                <div className="text-3xl font-bold text-primary">10x</div>
+                <div className="text-sm text-slate-400 mt-1">mais engajamento</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-primary">100%</div>
+                <div className="text-sm text-slate-400 mt-1">rastreável</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-primary">0</div>
+                <div className="text-sm text-slate-400 mt-1">planilhas</div>
+              </div>
             </div>
           </div>
+          <div className="text-sm text-slate-500">Plataforma interna de reconhecimento corporativo</div>
         </div>
-        <div className="text-sm text-slate-500">Plataforma interna de reconhecimento corporativo</div>
       </div>
 
       {/* Right panel */}
