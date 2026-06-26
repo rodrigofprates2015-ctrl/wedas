@@ -76,7 +76,7 @@ async function seed() {
   // Users
   await db.insert(schema.usersTable).values([
     {
-      name: "Helisson Dener de Campos Oliveira",
+      name: "Bruno Dener de Campos Oliveira",
       email: "rh@wedas.com",
       passwordHash: await hash("senha123"),
       department: "Recursos Humanos",
