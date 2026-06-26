@@ -23,7 +23,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     query: {
       enabled: !!token,
       retry: false,
-      queryKey: ["getMe", token],
+      staleTime: 5 * 60 * 1000,
+      refetchOnWindowFocus: false,
     },
   });
 
