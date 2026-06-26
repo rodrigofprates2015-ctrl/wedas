@@ -11,10 +11,15 @@ import { useQueryClient } from "@tanstack/react-query";
 import { getGetMeQueryKey, customFetch } from "@workspace/api-client-react";
 
 async function apiFetch(path: string, options: RequestInit = {}) {
-  const res = await customFetch<Response>(path, options);
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.error ?? "Erro desconhecido");
-  return data;
+  try {
+    return await customFetch<Record<string, unknown>>(path, options);
+  } catch (err: unknown) {
+    if (err && typeof err === "object" && "data" in err) {
+      const data = (err as { data?: { error?: string } }).data;
+      throw new Error(data?.error ?? "Erro desconhecido");
+    }
+    throw new Error("Erro desconhecido");
+  }
 }
 
 export default function MyProfilePage() {
