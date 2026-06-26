@@ -1,0 +1,41 @@
+June 25, 2026 at 10:49 PM
+failed
+674def1
+Update login page background and add a new website favicon Modify login page to use a background image instead of a solid color on the left panel, and update the favicon to display a "W". Replit-Commit-Author: Agent Replit-Commit-Session-Id: 8acb2964-1bb8-49fc-905a-46ec2820e185 Replit-Commit-Checkpoint-Type: full_checkpoint Replit-Commit-Event-Id: c03693d2-13f4-4e04-ad61-ff409ef6056e Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/05ae3585-2f73-44fc-9c13-a904731e60dc/8acb2964-1bb8-49fc-905a-46ec2820e185/e24ZlCz Replit-Helium-Checkpoint-Created: true
+
+Rollback
+Exited with status 2 while building your code.
+Read our docs for common ways to troubleshoot your deploy.
+
+All logs
+Search
+Search logs
+
+Jun 25, 10:48 PM - 10:51 PM
+GMT-3
+
+
+
+==> Downloading cache...
+==> Cloning from https://github.com/rodrigofprates2015-ctrl/wedas
+==> Checking out commit 674def12702edbdd1b04699bd55242f92ee6a2d4 in branch main
+==> Downloaded 94MB in 5s. Extraction took 5s.
+==> Using Node.js version 24.14.1 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+==> Running build command 'pnpm install --frozen-lockfile; pnpm run deploy'...
+> workspace@0.0.0 deploy /opt/render/project/src
+> pnpm run build && pnpm --filter @workspace/scripts run migrate && pnpm --filter @workspace/scripts run seed
+> workspace@0.0.0 build /opt/render/project/src
+> pnpm run typecheck && pnpm -r --filter "!@workspace/mockup-sandbox" --if-present run build
+> workspace@0.0.0 typecheck /opt/render/project/src
+> pnpm run typecheck:libs && pnpm -r --filter "./artifacts/**" --filter "./scripts" --if-present run typecheck
+> workspace@0.0.0 typecheck:libs /opt/render/project/src
+> tsc --build
+/opt/render/project/src/artifacts/wedas:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/wedas@0.0.0 typecheck: `tsc -p tsconfig.json --noEmit`
+Exit status 2
+ ELIFECYCLE  Command failed with exit code 2.
+ ELIFECYCLE  Command failed with exit code 2.
+ ELIFECYCLE  Command failed with exit code 2.
+==> Build failed 😞
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys

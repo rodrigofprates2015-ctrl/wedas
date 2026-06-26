@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { useLocation } from "wouter";
-import { useGetMe, useLogin, useLogout, setAuthTokenGetter } from "@workspace/api-client-react";
+import { useGetMe, useLogin, useLogout, setAuthTokenGetter, getGetMeQueryKey } from "@workspace/api-client-react";
 import type { LoginInput, User } from "@workspace/api-client-react";
 
 setAuthTokenGetter(() => localStorage.getItem("wedas_token"));
@@ -21,6 +21,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const { data: user, isLoading: isUserLoading, refetch } = useGetMe({
     query: {
+      queryKey: getGetMeQueryKey(),
       enabled: !!token,
       retry: false,
       staleTime: 5 * 60 * 1000,
