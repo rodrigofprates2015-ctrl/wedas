@@ -41,8 +41,11 @@ async function migrate() {
         position TEXT NOT NULL,
         role user_role NOT NULL DEFAULT 'employee',
         active BOOLEAN NOT NULL DEFAULT true,
+        avatar_url TEXT,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
+
+      ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar_url TEXT;
 
       CREATE TABLE IF NOT EXISTS categories (
         id SERIAL PRIMARY KEY,
