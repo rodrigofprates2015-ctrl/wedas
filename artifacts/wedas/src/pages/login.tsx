@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Coins, AlertCircle } from "lucide-react";
 import heroBg from "@assets/bh_home_1782438117211.png";
+import companyLogo from "@assets/logo_(1)_1782440246700.svg";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -42,11 +43,15 @@ export default function LoginPage() {
       >
         <div className="absolute inset-0 bg-[#0F172A]/70" />
         <div className="relative z-10 flex flex-col justify-between h-full">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
-              <Coins className="h-6 w-6 text-white" />
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
+                <Coins className="h-6 w-6 text-white" />
+              </div>
+              <span className="text-2xl font-bold tracking-tight" style={{ fontFamily: "'Raleway', sans-serif" }}>Wédas</span>
             </div>
-            <span className="text-2xl font-bold tracking-tight" style={{ fontFamily: "'Raleway', sans-serif" }}>Wédas</span>
+            <div className="w-px h-8 bg-white/30" />
+            <img src={companyLogo} alt="Logo" className="h-8 w-auto" />
           </div>
           <div>
             <blockquote
