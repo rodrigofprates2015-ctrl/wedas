@@ -13,6 +13,7 @@ export const usersTable = pgTable("users", {
   position: text("position").notNull(),
   role: userRoleEnum("role").notNull().default("employee"),
   active: boolean("active").notNull().default(true),
+  avatarUrl: text("avatar_url"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 

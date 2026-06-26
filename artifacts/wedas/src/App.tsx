@@ -13,6 +13,7 @@ import ReportsPage from "@/pages/reports";
 import SettingsPage from "@/pages/settings-page";
 import UsersPage from "@/pages/users-page";
 import ProfilePage from "@/pages/profile";
+import MyProfilePage from "@/pages/my-profile";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient({
@@ -75,6 +76,9 @@ function Router() {
         </Route>
         <Route path="/profile/:id">
           <ProtectedRoute component={ProfilePage} />
+        </Route>
+        <Route path="/me">
+          <ProtectedRoute component={MyProfilePage} />
         </Route>
         <Route component={NotFound} />
       </Switch>
